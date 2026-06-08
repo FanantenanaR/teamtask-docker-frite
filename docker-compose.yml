@@ -1,0 +1,24 @@
+services:
+  db:
+    build: .
+    image: teamtask-db:latest
+    container_name: teamtask-db
+    environment:
+      POSTGRES_USER: bici
+      POSTGRES_PASSWORD: bici
+      POSTGRES_DB: teamtask
+    ports:
+      - "5432:5432"
+    volumes:
+      # Persiste les données entre les redémarrages.
+      # IMPORTANT : tant que ce volume existe, le dump n'est PAS réimporté.
+      - teamtask_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bici -d teamtask"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  teamtask_pgdata:

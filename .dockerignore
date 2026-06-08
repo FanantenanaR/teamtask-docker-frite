@@ -1,0 +1,7 @@
+# On garde uniquement ce qui doit entrer dans le contexte de build.
+# Le gros backup .zip n'est pas nécessaire pour l'image.
+backup_202606081508.zip
+README.md
+docker-compose.yml
+.git
+.gitignore
